@@ -1,614 +1,896 @@
 <!DOCTYPE html>
-<html lang="sl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Arena | Pekarna & Okrepčevalnica Trzin</title>
-  <meta name="description" content="Arena v Trzinu – svež kruh, rogljički, burek, pizza, kebab, hamburgerji in še več. Odprto vsak dan od 7:00 do 19:00.">
+<title>APEX F1 — Formula 1 Hub</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+    scroll-behavior: smooth;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #24170f;
-      background: #faf6f0;
-      line-height: 1.6;
-    }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: white;
+}
 
-    /* NAVBAR */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 7%;
-      background: rgba(35, 22, 14, 0.94);
-      backdrop-filter: blur(10px);
-    }
+/* NAVBAR */
 
-    .logo {
-      color: #f2c078;
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: 3px;
-    }
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 6%;
+    background: rgba(5,5,5,.92);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #252525;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -2px;
+}
+
+.logo span {
+    color: #e10600;
+}
+
+nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: .25s;
+}
+
+nav a:hover {
+    color: #e10600;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 7% 70px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(90deg, #050505 10%, rgba(5,5,5,.78), rgba(5,5,5,.25)),
+        url("https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=2000&q=85")
+        center/cover;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    right: -150px;
+    bottom: -200px;
+    width: 600px;
+    height: 600px;
+    background: #e10600;
+    filter: blur(180px);
+    opacity: .25;
+}
+
+.hero-content {
+    max-width: 850px;
+    position: relative;
+    z-index: 2;
+}
+
+.tag {
+    color: #e10600;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(65px, 11vw, 145px);
+    line-height: .82;
+    font-style: italic;
+    font-weight: 1000;
+    letter-spacing: -7px;
+}
+
+.hero h1 span {
+    color: #e10600;
+}
+
+.hero p {
+    margin-top: 30px;
+    max-width: 600px;
+    font-size: 19px;
+    color: #c8c8c8;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 35px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.red {
+    background: #e10600;
+    color: white;
+}
+
+.red:hover {
+    background: #ff211a;
+    transform: translateY(-2px);
+}
+
+.outline {
+    border: 1px solid #555;
+    color: white;
+}
+
+.outline:hover {
+    border-color: #e10600;
+    color: #e10600;
+}
+
+/* GENERAL */
+
+section {
+    padding: 100px 7%;
+}
+
+.section-title {
+    margin-bottom: 50px;
+}
+
+.section-title small {
+    color: #e10600;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.section-title h2 {
+    font-size: clamp(40px, 6vw, 70px);
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* DRIVERS */
+
+.drivers {
+    background: #101010;
+}
+
+.driver-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.driver {
+    min-height: 270px;
+    padding: 25px;
+    background: #181818;
+    border: 1px solid #292929;
+    position: relative;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.driver:hover {
+    transform: translateY(-6px);
+    border-color: #e10600;
+}
+
+.driver-number {
+    font-size: 70px;
+    font-weight: 900;
+    font-style: italic;
+    color: #303030;
+    position: absolute;
+    right: 12px;
+    top: 0;
+}
+
+.driver h3 {
+    position: absolute;
+    bottom: 45px;
+    font-size: 24px;
+}
+
+.driver p {
+    position: absolute;
+    bottom: 22px;
+    color: #e10600;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* TEAMS */
+
+.teams {
+    background: #080808;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.team {
+    padding: 30px;
+    min-height: 150px;
+    background: #111;
+    border-left: 5px solid #e10600;
+    transition: .3s;
+}
+
+.team:hover {
+    background: #181818;
+    transform: translateX(5px);
+}
+
+.team h3 {
+    font-size: 25px;
+    font-style: italic;
+}
+
+.team p {
+    margin-top: 12px;
+    color: #888;
+}
+
+/* CALENDAR */
+
+.calendar {
+    background: #111;
+}
+
+.races {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.race {
+    padding: 22px;
+    background: #181818;
+    border: 1px solid #292929;
+}
+
+.race-number {
+    color: #e10600;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.race h3 {
+    margin-top: 10px;
+}
+
+.race p {
+    color: #888;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+/* FEATURE */
+
+.feature {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(90deg, #050505 25%, rgba(5,5,5,.65)),
+        url("https://images.unsplash.com/photo-1532906619279-a8b6cd4a7b21?auto=format&fit=crop&w=2000&q=85")
+        center/cover;
+}
+
+.feature-content {
+    max-width: 650px;
+}
+
+.feature h2 {
+    font-size: clamp(45px, 7vw, 80px);
+    line-height: .9;
+    font-style: italic;
+}
+
+.feature h2 span {
+    color: #e10600;
+}
+
+.feature p {
+    margin-top: 25px;
+    color: #bbb;
+    font-size: 18px;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 50px 7%;
+    background: #050505;
+    border-top: 1px solid #222;
+}
+
+.footer-logo {
+    font-size: 30px;
+    font-weight: 900;
+    font-style: italic;
+}
+
+.footer-logo span {
+    color: #e10600;
+}
+
+footer p {
+    margin-top: 10px;
+    color: #777;
+}
+
+/* MOBILE */
+
+@media(max-width: 900px) {
 
     nav ul {
-      display: flex;
-      list-style: none;
-      gap: 30px;
+        display: none;
     }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: 0.3s;
+    .driver-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    nav a:hover {
-      color: #f2c078;
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    /* HERO */
+    .races {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 550px) {
+
+    section {
+        padding: 75px 5%;
+    }
+
+    .driver-grid,
+    .team-grid,
+    .races {
+        grid-template-columns: 1fr;
+    }
+
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 20px 70px;
-      position: relative;
-      overflow: hidden;
-
-      background:
-        linear-gradient(rgba(35, 20, 10, 0.65), rgba(35, 20, 10, 0.78)),
-        url("https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=2000&q=85")
-        center/cover no-repeat;
-    }
-
-    .hero-content {
-      max-width: 850px;
-      color: white;
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      color: #f2c078;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 20px;
+        padding-left: 5%;
+        padding-right: 5%;
     }
 
     .hero h1 {
-      font-size: clamp(60px, 11vw, 125px);
-      line-height: 0.9;
-      letter-spacing: -5px;
-      margin-bottom: 28px;
-      font-weight: 900;
+        letter-spacing: -4px;
     }
-
-    .hero p {
-      font-size: 20px;
-      max-width: 620px;
-      margin: auto;
-      color: #f7eee5;
-    }
-
-    .buttons {
-      margin-top: 35px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 15px 28px;
-      border-radius: 40px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .btn-primary {
-      background: #c87932;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #e09449;
-      transform: translateY(-2px);
-    }
-
-    .btn-outline {
-      border: 1px solid rgba(255,255,255,0.6);
-      color: white;
-    }
-
-    .btn-outline:hover {
-      background: white;
-      color: #24170f;
-    }
-
-    /* GENERAL */
-    section {
-      padding: 100px 7%;
-    }
-
-    .section-heading {
-      max-width: 650px;
-      margin-bottom: 50px;
-    }
-
-    .section-heading span {
-      color: #bd6e2c;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      font-weight: bold;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(38px, 5vw, 60px);
-      line-height: 1;
-      margin-top: 12px;
-    }
-
-    .section-heading p {
-      margin-top: 18px;
-      color: #6e6259;
-      font-size: 17px;
-    }
-
-    /* MENU */
-    .menu {
-      background: #fff;
-    }
-
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .menu-card {
-      background: #faf6f0;
-      padding: 30px;
-      border-radius: 18px;
-      border: 1px solid #eee3d7;
-      transition: 0.3s;
-    }
-
-    .menu-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(60,40,20,0.08);
-    }
-
-    .menu-icon {
-      font-size: 35px;
-      margin-bottom: 18px;
-    }
-
-    .menu-card h3 {
-      font-size: 23px;
-      margin-bottom: 10px;
-    }
-
-    .menu-card p {
-      color: #746960;
-    }
-
-    /* FEATURE */
-    .feature {
-      background: #2b1b12;
-      color: white;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .feature-image {
-      height: 500px;
-      border-radius: 25px;
-      background:
-        linear-gradient(rgba(30,15,5,.15), rgba(30,15,5,.25)),
-        url("https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=85")
-        center/cover;
-    }
-
-    .feature h2 {
-      font-size: clamp(40px, 5vw, 65px);
-      line-height: 1;
-      margin: 15px 0 25px;
-    }
-
-    .feature p {
-      color: #d9ccc0;
-      font-size: 18px;
-      max-width: 550px;
-    }
-
-    .feature .section-heading span {
-      color: #f2c078;
-    }
-
-    /* INFO */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .info-card {
-      background: white;
-      padding: 35px;
-      border-radius: 20px;
-      border: 1px solid #eee3d7;
-    }
-
-    .info-card .icon {
-      font-size: 30px;
-      margin-bottom: 15px;
-    }
-
-    .info-card h3 {
-      margin-bottom: 8px;
-      font-size: 22px;
-    }
-
-    .info-card p {
-      color: #6e6259;
-    }
-
-    /* INSTAGRAM */
-    .instagram {
-      text-align: center;
-      background: #eee4d8;
-    }
-
-    .instagram h2 {
-      font-size: clamp(38px, 5vw, 60px);
-      margin: 12px 0 20px;
-    }
-
-    .instagram p {
-      color: #6e6259;
-      margin-bottom: 25px;
-    }
-
-    .instagram-link {
-      color: #24170f;
-      font-size: 20px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .instagram-link:hover {
-      color: #bd6e2c;
-    }
-
-    /* FOOTER */
-    footer {
-      background: #1d120c;
-      color: #d9ccc0;
-      text-align: center;
-      padding: 35px 20px;
-    }
-
-    footer .footer-logo {
-      color: #f2c078;
-      font-size: 25px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      margin-bottom: 10px;
-    }
-
-    footer p {
-      font-size: 14px;
-    }
-
-    /* MOBILE */
-    @media (max-width: 850px) {
-      nav {
-        padding: 18px 5%;
-      }
-
-      nav ul {
-        gap: 12px;
-      }
-
-      nav a {
-        font-size: 12px;
-      }
-
-      .menu-grid,
-      .info-grid,
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-image {
-        height: 350px;
-        order: 2;
-      }
-
-      section {
-        padding: 75px 5%;
-      }
-
-      .hero h1 {
-        letter-spacing: -3px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      nav ul {
-        display: none;
-      }
-
-      .hero p {
-        font-size: 17px;
-      }
-
-      .buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .btn {
-        width: 220px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <div class="logo">ARENA</div>
+<!-- NAVIGATION -->
+
+<nav>
+    <div class="logo">APEX<span>F1</span></div>
 
     <ul>
-      <li><a href="#ponudba">PONUDBA</a></li>
-      <li><a href="#o-nas">O NAS</a></li>
-      <li><a href="#info">INFO</a></li>
-      <li><a href="#kontakt">KONTAKT</a></li>
+        <li><a href="#drivers">DRIVERS</a></li>
+        <li><a href="#teams">TEAMS</a></li>
+        <li><a href="#calendar">CALENDAR</a></li>
     </ul>
-  </nav>
+</nav>
 
-  <!-- HERO -->
-  <header class="hero">
+
+<!-- HERO -->
+
+<header class="hero">
+
     <div class="hero-content">
 
-      <div class="eyebrow">Pekarna & okrepčevalnica · Trzin</div>
+        <div class="tag">Formula 1 · 2026</div>
 
-      <h1>ARENA</h1>
+        <h1>
+            FULL<br>
+            <span>THROTTLE.</span>
+        </h1>
 
-      <p>
-        Sveže, okusno in pripravljeno za vas.
-        Od klasičnih pekovskih dobrot do pice,
-        kebaba in hamburgerjev.
-      </p>
-
-      <div class="buttons">
-        <a href="#ponudba" class="btn btn-primary">
-          Oglej si ponudbo
-        </a>
-
-        <a href="#info" class="btn btn-outline">
-          Kdaj smo odprti?
-        </a>
-      </div>
-
-    </div>
-  </header>
-
-  <!-- MENU -->
-  <section class="menu" id="ponudba">
-
-    <div class="section-heading">
-      <span>Naša ponudba</span>
-
-      <h2>Za vsak okus.</h2>
-
-      <p>
-        Izbiraj med svežimi pekovskimi izdelki in priljubljenimi
-        jedmi za hiter zajtrk, malico ali kosilo.
-      </p>
-    </div>
-
-    <div class="menu-grid">
-
-      <div class="menu-card">
-        <div class="menu-icon">🥐</div>
-        <h3>Pekovski izdelki</h3>
         <p>
-          Sveži rogljički, kruh in druge klasične pekovske dobrote.
+            Your Formula 1 hub for drivers, teams and the 2026
+            Grand Prix calendar. 24 races. 11 teams. 22 drivers.
         </p>
-      </div>
 
-      <div class="menu-card">
-        <div class="menu-icon">🥟</div>
-        <h3>Burek</h3>
-        <p>
-          Klasičen burek za hiter in konkreten obrok.
-        </p>
-      </div>
+        <div class="buttons">
 
-      <div class="menu-card">
-        <div class="menu-icon">🍕</div>
-        <h3>Pizza</h3>
-        <p>
-          Topla pizza, pripravljena za takojšnje uživanje.
-        </p>
-      </div>
+            <a href="#drivers" class="btn red">
+                MEET THE GRID
+            </a>
 
-      <div class="menu-card">
-        <div class="menu-icon">🥙</div>
-        <h3>Kebab</h3>
-        <p>
-          Okusen kebab, ko si za nekaj bolj konkretnega.
-        </p>
-      </div>
+            <a href="#calendar" class="btn outline">
+                VIEW CALENDAR
+            </a>
 
-      <div class="menu-card">
-        <div class="menu-icon">🍔</div>
-        <h3>Hamburger</h3>
-        <p>
-          Klasičen hamburger za hitro in okusno malico.
-        </p>
-      </div>
-
-      <div class="menu-card">
-        <div class="menu-icon">☕</div>
-        <h3>In še več</h3>
-        <p>
-          Ustavi se pri Areni in odkrij celotno ponudbo.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FEATURE -->
-  <section class="feature" id="o-nas">
-
-    <div class="feature-grid">
-
-      <div class="feature-image"></div>
-
-      <div>
-        <div class="section-heading">
-          <span>Arena · Trzin</span>
-
-          <h2>Ko si za nekaj dobrega.</h2>
-
-          <p>
-            Arena je prostor za vse, ki imajo radi dobro hrano,
-            sveže pekovske izdelke in hiter obrok brez kompliciranja.
-          </p>
-
-          <p style="margin-top:20px;">
-            Pridi na zajtrk, malico ali kosilo.
-            Naj bo to rogljiček, burek, pizza, kebab ali hamburger —
-            pri Areni se vedno najde nekaj zate.
-          </p>
         </div>
-      </div>
 
     </div>
 
-  </section>
+</header>
 
-  <!-- INFORMATION -->
-  <section id="info">
 
-    <div class="section-heading">
-      <span>Praktične informacije</span>
+<!-- DRIVERS -->
 
-      <h2>Najdeš nas v Trzinu.</h2>
+<section class="drivers" id="drivers">
+
+    <div class="section-title">
+        <small>2026 Grid</small>
+        <h2>THE DRIVERS</h2>
     </div>
 
-    <div class="info-grid">
+    <div class="driver-grid">
 
-      <div class="info-card">
-        <div class="icon">🕐</div>
+        <div class="driver">
+            <div class="driver-number">63</div>
+            <h3>George Russell</h3>
+            <p>Mercedes</p>
+        </div>
 
-        <h3>Odpiralni čas</h3>
+        <div class="driver">
+            <div class="driver-number">12</div>
+            <h3>Kimi Antonelli</h3>
+            <p>Mercedes</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">16</div>
+            <h3>Charles Leclerc</h3>
+            <p>Ferrari</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">44</div>
+            <h3>Lewis Hamilton</h3>
+            <p>Ferrari</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">1</div>
+            <h3>Lando Norris</h3>
+            <p>McLaren</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">81</div>
+            <h3>Oscar Piastri</h3>
+            <p>McLaren</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">3</div>
+            <h3>Max Verstappen</h3>
+            <p>Red Bull Racing</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">6</div>
+            <h3>Isack Hadjar</h3>
+            <p>Red Bull Racing</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">30</div>
+            <h3>Liam Lawson</h3>
+            <p>Racing Bulls</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">41</div>
+            <h3>Arvid Lindblad</h3>
+            <p>Racing Bulls</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">10</div>
+            <h3>Pierre Gasly</h3>
+            <p>Alpine</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">43</div>
+            <h3>Franco Colapinto</h3>
+            <p>Alpine</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">31</div>
+            <h3>Esteban Ocon</h3>
+            <p>Haas</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">87</div>
+            <h3>Oliver Bearman</h3>
+            <p>Haas</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">27</div>
+            <h3>Nico Hulkenberg</h3>
+            <p>Audi</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">5</div>
+            <h3>Gabriel Bortoleto</h3>
+            <p>Audi</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">55</div>
+            <h3>Carlos Sainz</h3>
+            <p>Williams</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">23</div>
+            <h3>Alexander Albon</h3>
+            <p>Williams</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">14</div>
+            <h3>Fernando Alonso</h3>
+            <p>Aston Martin</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">18</div>
+            <h3>Lance Stroll</h3>
+            <p>Aston Martin</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">11</div>
+            <h3>Sergio Perez</h3>
+            <p>Cadillac</p>
+        </div>
+
+        <div class="driver">
+            <div class="driver-number">77</div>
+            <h3>Valtteri Bottas</h3>
+            <p>Cadillac</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TEAMS -->
+
+<section class="teams" id="teams">
+
+    <div class="section-title">
+        <small>2026 Championship</small>
+        <h2>THE TEAMS</h2>
+    </div>
+
+    <div class="team-grid">
+
+        <div class="team">
+            <h3>McLaren</h3>
+            <p>Lando Norris · Oscar Piastri</p>
+        </div>
+
+        <div class="team">
+            <h3>Mercedes</h3>
+            <p>George Russell · Kimi Antonelli</p>
+        </div>
+
+        <div class="team">
+            <h3>Red Bull Racing</h3>
+            <p>Max Verstappen · Isack Hadjar</p>
+        </div>
+
+        <div class="team">
+            <h3>Ferrari</h3>
+            <p>Charles Leclerc · Lewis Hamilton</p>
+        </div>
+
+        <div class="team">
+            <h3>Williams</h3>
+            <p>Carlos Sainz · Alexander Albon</p>
+        </div>
+
+        <div class="team">
+            <h3>Aston Martin</h3>
+            <p>Fernando Alonso · Lance Stroll</p>
+        </div>
+
+        <div class="team">
+            <h3>Alpine</h3>
+            <p>Pierre Gasly · Franco Colapinto</p>
+        </div>
+
+        <div class="team">
+            <h3>Haas</h3>
+            <p>Esteban Ocon · Oliver Bearman</p>
+        </div>
+
+        <div class="team">
+            <h3>Audi</h3>
+            <p>Nico Hulkenberg · Gabriel Bortoleto</p>
+        </div>
+
+        <div class="team">
+            <h3>Racing Bulls</h3>
+            <p>Liam Lawson · Arvid Lindblad</p>
+        </div>
+
+        <div class="team">
+            <h3>Cadillac</h3>
+            <p>Sergio Perez · Valtteri Bottas</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CALENDAR -->
+
+<section class="calendar" id="calendar">
+
+    <div class="section-title">
+        <small>2026 Season</small>
+        <h2>RACE CALENDAR</h2>
+    </div>
+
+    <div class="races">
+
+        <div class="race">
+            <div class="race-number">01 · MAR 06–08</div>
+            <h3>Australia</h3>
+            <p>Melbourne</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">02 · MAR 13–15</div>
+            <h3>China</h3>
+            <p>Shanghai · Sprint</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">03 · MAR 27–29</div>
+            <h3>Japan</h3>
+            <p>Suzuka</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">04 · APR 10–12</div>
+            <h3>Bahrain</h3>
+            <p>Sakhir</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">05 · APR 17–19</div>
+            <h3>Saudi Arabia</h3>
+            <p>Jeddah</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">06 · MAY 01–03</div>
+            <h3>Miami</h3>
+            <p>USA · Sprint</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">07 · MAY 22–24</div>
+            <h3>Canada</h3>
+            <p>Montreal · Sprint</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">08 · JUN 05–07</div>
+            <h3>Monaco</h3>
+            <p>Monte Carlo</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">09 · JUN 12–14</div>
+            <h3>Spain</h3>
+            <p>Barcelona</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">10 · JUN 26–28</div>
+            <h3>Austria</h3>
+            <p>Spielberg</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">11 · JUL 03–05</div>
+            <h3>Great Britain</h3>
+            <p>Silverstone · Sprint</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">12 · JUL 17–19</div>
+            <h3>Belgium</h3>
+            <p>Spa-Francorchamps</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">13 · JUL 24–26</div>
+            <h3>Hungary</h3>
+            <p>Budapest</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">14 · AUG 21–23</div>
+            <h3>Netherlands</h3>
+            <p>Zandvoort · Sprint</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">15 · SEP 04–06</div>
+            <h3>Italy</h3>
+            <p>Monza</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">16 · SEP 11–13</div>
+            <h3>Spain</h3>
+            <p>Madrid</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">17 · SEP 24–26</div>
+            <h3>Azerbaijan</h3>
+            <p>Baku</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">18 · OCT 09–11</div>
+            <h3>Singapore</h3>
+            <p>Singapore · Sprint</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">19 · OCT 23–25</div>
+            <h3>USA</h3>
+            <p>Austin</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">20 · OCT 30–NOV 01</div>
+            <h3>Mexico</h3>
+            <p>Mexico City</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">21 · NOV 06–08</div>
+            <h3>Brazil</h3>
+            <p>São Paulo</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">22 · NOV 19–21</div>
+            <h3>Las Vegas</h3>
+            <p>USA</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">23 · NOV 27–29</div>
+            <h3>Qatar</h3>
+            <p>Lusail</p>
+        </div>
+
+        <div class="race">
+            <div class="race-number">24 · DEC 04–06</div>
+            <h3>Abu Dhabi</h3>
+            <p>Yas Marina</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURE -->
+
+<section class="feature">
+
+    <div class="feature-content">
+
+        <div class="tag">The new era</div>
+
+        <h2>
+            2026.<br>
+            <span>NEW RULES.</span><br>
+            NEW ERA.
+        </h2>
 
         <p>
-          Ponedeljek – nedelja<br>
-          <strong>07:00 – 19:00</strong>
+            Formula 1 entered a major new technical era in 2026,
+            with new regulations, new teams and a new generation
+            of cars using 100% advanced sustainable fuel.
         </p>
-      </div>
 
-      <div class="info-card">
-        <div class="icon">📍</div>
-
-        <h3>Lokacija</h3>
-
-        <p>
-          Trzin, Slovenija
-        </p>
-      </div>
-
-      <div class="info-card">
-        <div class="icon">📸</div>
-
-        <h3>Instagram</h3>
-
-        <p>
-          Spremljaj nas na Instagramu.
-        </p>
-      </div>
+        <div class="buttons">
+            <a
+                href="https://www.formula1.com/"
+                target="_blank"
+                class="btn red"
+            >
+                F1 OFFICIAL WEBSITE
+            </a>
+        </div>
 
     </div>
 
-  </section>
+</section>
 
-  <!-- INSTAGRAM -->
-  <section class="instagram" id="kontakt">
 
-    <div class="eyebrow" style="color:#bd6e2c;">
-      Spremljaj Areno
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-logo">
+        APEX<span>F1</span>
     </div>
-
-    <h2>Ujemi nas na Instagramu.</h2>
 
     <p>
-      Oglej si novosti, ponudbo in utrinke iz Arene.
+        Formula 1 fan website · 2026
     </p>
-
-    <a
-      class="instagram-link"
-      href="https://www.instagram.com/adam.mohor/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      @adam.mohor →
-    </a>
-
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-
-    <div class="footer-logo">ARENA</div>
 
     <p>
-      Pekarna & okrepčevalnica · Trzin, Slovenija
+        This is an unofficial fan website and is not affiliated with Formula 1.
     </p>
 
-    <p style="margin-top:8px;">
-      Odprto vsak dan · 07:00 – 19:00
-    </p>
-
-    <p style="margin-top:20px; opacity:.55;">
-      © 2026 Arena. Vse pravice pridržane.
-    </p>
-
-  </footer>
+</footer>
 
 </body>
 </html>
